@@ -5,7 +5,7 @@ import images.Pixel;
 public class TestBW {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
-        
+
         APImage image = new APImage("test\\src\\images\\smokey.jpg");
         image.draw();
         

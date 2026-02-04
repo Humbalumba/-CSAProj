@@ -1,0 +1,43 @@
+import java.util.Scanner;
+import images.APImage;
+import images.Pixel;
+
+public class ColorFilter {
+    public static void main(String[] args) {
+        Scanner reader = new Scanner(System.in);
+
+        System.out.print("Enter an image file name: ");
+        String fileName = reader.nextLine();
+        APImage theOriginal = new APImage(fileName);
+        theOriginal.draw();
+
+        System.out.print("Enter red adjustment: ");
+        int redAdj = reader.nextInt();
+        System.out.print("Enter green adjustment: ");
+        int greenAdj = reader.nextInt();
+        System.out.print("Enter blue adjustment: ");
+        int blueAdj = reader.nextInt();
+
+        // Convention: Create a blank image to receive the filtered pixels
+        int width = theOriginal.getWidth();
+        int height = theOriginal.getHeight();
+        APImage theFiltered = new APImage(width, height);
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Pixel oldPixel = theOriginal.getPixel(x, y);
+                Pixel newPixel = theFiltered.getPixel(x, y);
+
+                // Apply adjustments and clamp values between 0-255
+                int red = Math.max(0, Math.min(255, oldPixel.getRed() + redAdj));
+                int green = Math.max(0, Math.min(255, oldPixel.getGreen() + greenAdj));
+                int blue = Math.max(0, Math.min(255, oldPixel.getBlue() + blueAdj));
+
+                newPixel.setRed(red);
+                newPixel.setGreen(green);
+                newPixel.setBlue(blue);
+            }
+        }
+        theFiltered.draw();
+    }
+}
