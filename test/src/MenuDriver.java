@@ -41,11 +41,10 @@ public class MenuDriver {
                     image = Filters.rotate(image, angle);
                     image.draw();
 
-                } else if (input == 4){
-                    System.out.println("Exiting...");
                 } else {
                     System.out.println("Invalid option. Please try again.");
             }
-        }
+        }                    
+        System.out.println("Exiting...");
     }
 }
