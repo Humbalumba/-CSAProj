@@ -109,5 +109,27 @@ public class Filters {
         }
 
     }
+
+    public static APImage colorFilter(APImage image, int redAdj, int greenAdj, int blueAdj) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        APImage filteredImage = new APImage(width, height);
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Pixel oldPixel = image.getPixel(x, y);
+                Pixel newPixel = filteredImage.getPixel(x, y);
+
+                int red = Math.max(0, Math.min(255, oldPixel.getRed() + redAdj));
+                int green = Math.max(0, Math.min(255, oldPixel.getGreen() + greenAdj));
+                int blue = Math.max(0, Math.min(255, oldPixel.getBlue() + blueAdj));
+
+                newPixel.setRed(red);
+                newPixel.setGreen(green);
+                newPixel.setBlue(blue);
+            }
+        }
+        return filteredImage;
+    }
     
 }

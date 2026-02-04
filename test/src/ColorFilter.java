@@ -39,5 +39,6 @@ public class ColorFilter {
             }
         }
         theFiltered.draw();
+        reader.close();
     }
 }
