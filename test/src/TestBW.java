@@ -6,7 +6,12 @@ public class TestBW {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
         
+<<<<<<< Updated upstream
         APImage image = new APImage("test\\src\\images\\smokey.jpg");
+=======
+       
+        APImage image = new APImage("test/src/images/smokey.jpg");
+>>>>>>> Stashed changes
         image.draw();
         
         for (Pixel p : image) {
