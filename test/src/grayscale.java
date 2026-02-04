@@ -2,7 +2,7 @@ import java.util.Scanner;
 import images.APImage;
 import images.Pixel;
 
-public class grayscale {
+public class Grayscale {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
         APImage image = new APImage("test\\src\\images\\smokey.jpg");

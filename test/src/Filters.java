@@ -1,9 +1,9 @@
 import java.util.*;
 import images.*;
 
-public class filter {
+public class Filters {
     
-    public APImage blackAndWhite(APImage image) {
+    public static APImage blackAndWhite(APImage image) {
         for (Pixel p : image) {
             int red = p.getRed();
             int green = p.getGreen();
@@ -23,7 +23,7 @@ public class filter {
         }
         return image;
     }
-    public APImage grayscale(APImage image) {
+    public static APImage grayscale(APImage image) {
         for (Pixel p: image) {
             int red = p.getRed();
             int green = p.getGreen();
@@ -38,7 +38,7 @@ public class filter {
         return image;
     }
 
-    public APImage rotateLeft(APImage image) {
+    public static APImage rotateLeft(APImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
         Pixel[][] rotatedPixels = new Pixel[height][width];
@@ -58,7 +58,7 @@ public class filter {
         }
         return rotatedImage;
     }
-    public APImage rotateRight(APImage image) {
+    public static APImage rotateRight(APImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
         Pixel[][] rotatedPixels = new Pixel[height][width];
@@ -78,7 +78,7 @@ public class filter {
         }
         return rotatedImage;
     }
-    public APImage rotate180(APImage image) {
+    public static APImage rotate180(APImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
         Pixel[][] rotatedPixels = new Pixel[height][width];
@@ -97,6 +97,17 @@ public class filter {
             }
         }
         return rotatedImage;
+    }
+    public static APImage rotate(APImage image, int angle) {
+ 
+        if (angle == 90) {
+            return Filters.rotateRight(image);
+        } else if (angle == -90) {
+            return Filters.rotateLeft(image);
+        } else {
+            return Filters.rotate180(image);
+        }
+
     }
     
 }
