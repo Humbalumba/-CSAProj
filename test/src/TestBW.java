@@ -7,7 +7,7 @@ public class TestBW {
         Scanner reader = new Scanner(System.in);
         
        
-        APImage image = new APImage("C:\\Documents\\CSA 25-26\\Unit 4\\-CSAProj\\test\\src\\smokey.jpg");
+        APImage image = new APImage("test\\src\\images\\smokey.jpg");
         image.draw();
         
         for (Pixel p : image) {
