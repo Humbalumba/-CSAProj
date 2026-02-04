@@ -1,7 +1,9 @@
 {
-    "java.project.sourcePaths": ["src"],
+    "java.project.sourcePaths": [
+        "src"
+    ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "c:\\Documents\\CSA 25-26\\Unit 4\\-CSAProj\\images.jar"
     ]
 }
