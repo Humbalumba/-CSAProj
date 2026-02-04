@@ -38,5 +38,65 @@ public class filter {
         return image;
     }
 
+    public APImage rotateLeft(APImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        Pixel[][] rotatedPixels = new Pixel[height][width];
+        
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Pixel originalPixel = image.getPixel(x, y);
+                rotatedPixels[y][width - 1 - x] = originalPixel;
+            }
+        }
+        
+        APImage rotatedImage = new APImage(height, width);
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                rotatedImage.setPixel(y, x, rotatedPixels[y][x]);
+            }
+        }
+        return rotatedImage;
+    }
+    public APImage rotateRight(APImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        Pixel[][] rotatedPixels = new Pixel[height][width];
+        
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Pixel originalPixel = image.getPixel(x, y);
+                rotatedPixels[height - 1 - y][x] = originalPixel;
+            }
+        }
+        
+        APImage rotatedImage = new APImage(height, width);
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                rotatedImage.setPixel(y, x, rotatedPixels[y][x]);
+            }
+        }
+        return rotatedImage;
+    }
+    public APImage rotate180(APImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        Pixel[][] rotatedPixels = new Pixel[height][width];
+        
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Pixel originalPixel = image.getPixel(x, y);
+                rotatedPixels[height - 1 - y][width - 1 - x] = originalPixel;
+            }
+        }
+        
+        APImage rotatedImage = new APImage(height, width);
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                rotatedImage.setPixel(y, x, rotatedPixels[y][x]);
+            }
+        }
+        return rotatedImage;
+    }
     
 }
