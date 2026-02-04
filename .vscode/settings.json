@@ -1,7 +1,9 @@
 {
     "java.dependency.packagePresentation": "hierarchical",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "c:\\Users\\parik\\Downloads\\images.jar"
+        "images.jar"
+    ],
+    "java.project.sourcePaths": [
+        "test\\src"
     ]
 }
