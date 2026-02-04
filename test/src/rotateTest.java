@@ -1,7 +1,7 @@
 import java.util.*;
 import images.*;
 
-public class rotateTest {
+public class RotateTest {
     public APImage rotateLeft(APImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
@@ -72,22 +72,22 @@ public class rotateTest {
         System.out.print("Type 90,180,-90  to continue: ");
         String input = scanner.next();
         if (input.equals("90")) {
-            rotateTest rotator = new rotateTest();
+            RotateTest rotator = new RotateTest();
             APImage rotatedImage = rotator.rotateRight(image);
             rotatedImage.draw();
             return;
         } else if (input.equals("180")) {
-            rotateTest rotator = new rotateTest();
+            RotateTest rotator = new RotateTest();
             APImage rotatedImage = rotator.rotate180(image);
             rotatedImage.draw();
             return;
         } else if (input.equals("-90")) {      
-            rotateTest rotator = new rotateTest();
+            RotateTest rotator = new RotateTest();
             APImage rotatedImage = rotator.rotateLeft(image);
             rotatedImage.draw();
             return;
         }     
-        rotateTest rotator = new rotateTest();
+        RotateTest rotator = new RotateTest();
         APImage rotatedImage = rotator.rotateLeft(image);
         rotatedImage.draw();
         return;
