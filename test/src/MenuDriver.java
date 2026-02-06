@@ -12,12 +12,12 @@ public class MenuDriver {
         System.out.print("Enter image file name (default: smokey.jpg): ");
         String imageName = scanner.nextLine();
         if (imageName.isEmpty()) {
-            imageName = "test\src\images\smokey.jpg";
+            imageName = "test\\src\\images\\smokey.jpg";
         } else {
-            imageName = "test\src\images\" + imageName;
+            imageName = "test\\src\\images\\" + imageName;
         }
         image = new APImage(imageName);
-
+    }
     public void displayMenu() {
         System.out.println("Image Processing Menu:");
         System.out.println("1. Convert to Grayscale");
