@@ -7,6 +7,7 @@ public class TestBW {
         Scanner scanner = new Scanner(System.in);
 
         APImage image = new APImage("test\\src\\images\\smokey.jpg");
+
         image.draw();
         
         for (Pixel p : image) {
