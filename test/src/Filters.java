@@ -3,31 +3,41 @@ import images.*;
 
 public class Filters {
     public static APImage twoColorConvert(APImage image, int r1, int g1, int b1, int r2, int g2, int b2) {
-        for (Pixel p : image) {
-            int red = p.getRed();
-            int green = p.getGreen();
-            int blue = p.getBlue();
-            
-            int average = (red + green + blue) / 3;
-            
-            if (average < 128) {
-                p.setRed(r1);
-                p.setGreen(g1);
-                p.setBlue(b1);
-            } else {
-                p.setRed(r2);
-                p.setGreen(g2);
-                p.setBlue(b2);
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Pixel p = image.getPixel(x, y);
+                int red = p.getRed();
+                int green = p.getGreen();
+                int blue = p.getBlue();
+                
+                int average = (red + green + blue) / 3;
+                
+                if (average < 128) {
+                    p.setRed(r1);
+                    p.setGreen(g1);
+                    p.setBlue(b1);
+                } else {
+                    p.setRed(r2);
+                    p.setGreen(g2);
+                    p.setBlue(b2);
+                }
             }
         }
         return image;
     }
     public static APImage blackAndWhite(APImage image) {
-        twoColorConvert(image, 0, 0, 0, 255, 255, 255);
-        return image;
+        return twoColorConvert(image, 0, 0, 0, 255, 255, 255);
     }
     public static APImage grayscale(APImage image) {
-        for (Pixel p: image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+            Pixel p = image.getPixel(x, y);
             int red = p.getRed();
             int green = p.getGreen();
             int blue = p.getBlue();
@@ -37,6 +47,7 @@ public class Filters {
             p.setRed(average);
             p.setGreen(average);
             p.setBlue(average);
+            }
         }
         return image;
     }
@@ -224,10 +235,15 @@ public class Filters {
     }
 
     public static APImage negative(APImage image) {
-        for (Pixel p : image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+            Pixel p = image.getPixel(x, y);
             p.setRed(255 - p.getRed());
             p.setGreen(255 - p.getGreen());
             p.setBlue(255 - p.getBlue());
+            }
         }
         return image;
     }
