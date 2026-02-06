@@ -8,15 +8,17 @@ public class MenuDriver {
 
     public MenuDriver() {
         scanner = new Scanner(System.in);
-        image = new APImage("test\\src\\images\\smokey.jpg");
         System.out.print("Enter image file name (default: smokey.jpg): ");
         String imageName = scanner.nextLine();
-        if (imageName.isEmpty()) {
+        try{
+            imageName = "test\\src\\images\\" + imageName + ".jpg";
+            image = new APImage(imageName);
+        } catch (Exception e){
+            System.out.println("Invalid file name. Using default image.");
             imageName = "test\\src\\images\\smokey.jpg";
-        } else {
-            imageName = "test\\src\\images\\" + imageName;
+            image = new APImage(imageName);
         }
-        image = new APImage(imageName);
+
     }
     public void displayMenu() {
         System.out.println("Image Processing Menu:");
@@ -64,9 +66,8 @@ public class MenuDriver {
                 Filters.negative(image);
                 image.draw();
             } else if (input == 7) {
-                // Filters.posterize(image);
-                System.out.println("Posterize feature coming soon!");
-                // image.draw();
+                Filters.posterize(image);
+                image.draw();
             } else if (input == 8) {
                 System.out.print("Enter scale factor to enlarge: ");
                 double scaleFactor = scanner.nextDouble();

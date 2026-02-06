@@ -35,5 +35,6 @@ public class Blur {
             }
         }
         blurred.draw();
+        reader.close();
     }
 }

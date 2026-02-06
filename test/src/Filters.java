@@ -2,8 +2,7 @@ import java.util.*;
 import images.*;
 
 public class Filters {
-    
-    public static APImage blackAndWhite(APImage image) {
+    public static APImage twoColorConvert(APImage image, int r1, int g1, int b1, int r2, int g2, int b2) {
         for (Pixel p : image) {
             int red = p.getRed();
             int green = p.getGreen();
@@ -12,15 +11,19 @@ public class Filters {
             int average = (red + green + blue) / 3;
             
             if (average < 128) {
-                p.setRed(0);
-                p.setGreen(0);
-                p.setBlue(0);
+                p.setRed(r1);
+                p.setGreen(g1);
+                p.setBlue(b1);
             } else {
-                p.setRed(255);
-                p.setGreen(255);
-                p.setBlue(255);
+                p.setRed(r2);
+                p.setGreen(g2);
+                p.setBlue(b2);
             }
         }
+        return image;
+    }
+    public static APImage blackAndWhite(APImage image) {
+        twoColorConvert(image, 0, 0, 0, 255, 255, 255);
         return image;
     }
     public static APImage grayscale(APImage image) {
@@ -230,16 +233,10 @@ public class Filters {
     }
 
     public static APImage posterize(APImage image) {
-        int levels = 4; // reduce to 4 levels per channel
-        int size = 256 / levels;
-        for (Pixel p : image) {
-            int nr = (p.getRed() / size) * size + size / 2;
-            int ng = (p.getGreen() / size) * size + size / 2;
-            int nb = (p.getBlue() / size) * size + size / 2;
-            p.setRed(clamp(nr));
-            p.setGreen(clamp(ng));
-            p.setBlue(clamp(nb));
-        }
+        Random random = new Random();
+        int r1 = random.nextInt(256), g1 = random.nextInt(256), b1 = random.nextInt(256);
+        int r2 = random.nextInt(256), g2 = random.nextInt(256), b2 = random.nextInt(256);
+        twoColorConvert(image, r1, g1, b1, r2, g2, b2);
         return image;
     }
 

@@ -43,5 +43,6 @@ public class TestEdges {
             }
         }
         theSketch.draw();
+        intScanner.close();
     }
 }

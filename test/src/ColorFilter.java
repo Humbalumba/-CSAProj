@@ -38,5 +38,6 @@ public class ColorFilter {
             }
         }
         filtered.draw();
+        scanner.close();
     }
 }
