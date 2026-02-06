@@ -5,25 +5,25 @@ import images.Pixel;
 
 public class Posterize {
     public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
-        Random gen = new Random();
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
 
         System.out.print("Enter an image file name: ");
-        String fileName = reader.nextLine();
+        String fileName = scanner.nextLine();
         APImage theOriginal = new APImage(fileName);
         theOriginal.draw();
 
-        int r1 = gen.nextInt(256), g1 = gen.nextInt(256), b1 = gen.nextInt(256);
-        int r2 = gen.nextInt(256), g2 = gen.nextInt(256), b2 = gen.nextInt(256);
+        int r1 = random.nextInt(256), g1 = random.nextInt(256), b1 = random.nextInt(256);
+        int r2 = random.nextInt(256), g2 = random.nextInt(256), b2 = random.nextInt(256);
 
         int width = theOriginal.getWidth();
         int height = theOriginal.getHeight();
-        APImage thePosterized = new APImage(width, height);
+        APImage posterized = new APImage(width, height);
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Pixel oldPixel = theOriginal.getPixel(x, y);
-                Pixel newPixel = thePosterized.getPixel(x, y);
+                Pixel newPixel = posterized.getPixel(x, y);
 
                 int average = (oldPixel.getRed() + oldPixel.getGreen() + oldPixel.getBlue()) / 3;
 
@@ -38,6 +38,6 @@ public class Posterize {
                 }
             }
         }
-        thePosterized.draw();
+        posterized.draw();
     }
 }

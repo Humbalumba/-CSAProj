@@ -4,21 +4,21 @@ import images.Pixel;
 
 public class Negative {
     public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter an image file name: ");
-        String fileName = reader.nextLine();
-        APImage theOriginal = new APImage(fileName);
-        theOriginal.draw();
+        String fileName = scanner.nextLine();
+        APImage original = new APImage(fileName);
+        original.draw();
 
-        int width = theOriginal.getWidth();
-        int height = theOriginal.getHeight();
-        APImage theClone = new APImage(width, height);
+        int width = original.getWidth();
+        int height = original.getHeight();
+        APImage clone = new APImage(width, height);
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                Pixel pixelInOriginal = theOriginal.getPixel(x, y);
-                Pixel pixelInClone = theClone.getPixel(x, y);
+                Pixel pixelInOriginal = original.getPixel(x, y);
+                Pixel pixelInClone = clone.getPixel(x, y);
 
                 int average = (pixelInOriginal.getRed() + 
                                pixelInOriginal.getGreen() + 
@@ -32,6 +32,6 @@ public class Negative {
             }
         }
         
-        theClone.draw();
+        clone.draw();
     }
 }

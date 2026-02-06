@@ -4,30 +4,29 @@ import images.Pixel;
 
 public class TestEdges {
     public static void main(String[] args) {
-        Scanner intReader = new Scanner(System.in);
+        Scanner intScanner = new Scanner(System.in);
         System.out.print("Enter an integer threshold: ");
-        int threshold = intReader.nextInt();
+        int threshold = intScanner.nextInt();
 
-        Scanner stringReader = new Scanner(System.in);
+        Scanner stringScanner = new Scanner(System.in);
         System.out.print("Enter an image file name: ");
-        String fileName = stringReader.nextLine();
+        String fileName = stringScanner.nextLine();
 
-        APImage theOriginal = new APImage(fileName);
-        theOriginal.draw();
+        APImage original = new APImage(fileName);
+        original.draw();
 
         // Create a blank image to receive the edges
-        int width = theOriginal.getWidth();
-        int height = theOriginal.getHeight();
+        int width = original.getWidth();
+        int height = original.getHeight();
         APImage theSketch = new APImage(width, height);
 
         // Visit all pixels except for the left column and bottom row
         for (int y = 0; y < height - 1; y++) {
             for (int x = 1; x < width; x++) {
                 
-                Pixel oldPixel = theOriginal.getPixel(x, y);
-                Pixel leftPixel = theOriginal.getPixel(x - 1, y);
-                Pixel bottomPixel = theOriginal.getPixel(x, y + 1);
-
+                Pixel oldPixel = original.getPixel(x, y);
+                Pixel leftPixel = original.getPixel(x - 1, y);
+                Pixel bottomPixel = original.getPixel(x, y + 1);
                 int oldAve = (oldPixel.getRed() + oldPixel.getGreen() + oldPixel.getBlue()) / 3;
                 int leftAve = (leftPixel.getRed() + leftPixel.getGreen() + leftPixel.getBlue()) / 3;
                 int bottomAve = (bottomPixel.getRed() + bottomPixel.getGreen() + bottomPixel.getBlue()) / 3;
