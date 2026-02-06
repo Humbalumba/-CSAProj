@@ -1,7 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        // APImage image = new APImage("test\\src\\images\\smokey.jpg");
-        // image.draw();
+        System.out.println("Welcome to the Image Processing Program");
         MenuDriver menu = new MenuDriver();
         menu.runMenu();
     }
