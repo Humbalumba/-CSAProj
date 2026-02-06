@@ -5,24 +5,28 @@ import images.Pixel;
 public class Grayscale {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
-        APImage image = new APImage("test\\src\\images\\smokey.jpg");
+        System.out.print("Enter an image file name: ");
+        String fileName = reader.nextLine();
+        APImage image = new APImage(fileName);
         image.draw();
 
-        for (Pixel p: image) {
+        for (int i = 0; i < image.getWidth(); i++){
+
+            for (int j = 0; j < image.getHeight(); j++){
+            Pixel p = image.getPixel(i, j);
             int red = p.getRed();
             int green = p.getGreen();
             int blue = p.getBlue();
-
             int average = (red + green + blue) / 3;
-
             p.setRed(average);
             p.setGreen(average);
             p.setBlue(average);
         }
+    }
      
         System.out.print("Press return to continue: ");
         reader.nextLine();
-        
+        reader.close();
         image.draw();
     }   
 }

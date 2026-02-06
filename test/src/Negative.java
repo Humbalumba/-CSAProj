@@ -33,5 +33,6 @@ public class Negative {
         }
         
         clone.draw();
+        scanner.close();
     }
 }

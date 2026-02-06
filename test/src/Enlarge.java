@@ -4,12 +4,11 @@ import java.util.Scanner;
 
 public class Enlarge {
     public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Enter an image file name: ");
-        String fileName = reader.nextLine();
+        String fileName = scanner.nextLine();
         System.out.print("Enter an enlargement factor: ");
-        int factor = reader.nextInt();
-
+        int factor = scanner.nextInt(); 
         APImage original = new APImage(fileName);
         original.draw();
 
@@ -32,5 +31,6 @@ public class Enlarge {
             }
         }
         large.draw();
+        scanner.close();
     }
 }

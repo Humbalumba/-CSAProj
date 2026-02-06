@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 import images.*;
 
 public class RotateTest {
@@ -71,26 +71,19 @@ public class RotateTest {
         image.draw();
         System.out.print("Type 90,180,-90  to continue: ");
         String input = scanner.next();
-        if (input.equals("90")) {
-            RotateTest rotator = new RotateTest();
-            APImage rotatedImage = rotator.rotateRight(image);
-            rotatedImage.draw();
-            return;
-        } else if (input.equals("180")) {
-            RotateTest rotator = new RotateTest();
-            APImage rotatedImage = rotator.rotate180(image);
-            rotatedImage.draw();
-            return;
-        } else if (input.equals("-90")) {      
-            RotateTest rotator = new RotateTest();
-            APImage rotatedImage = rotator.rotateLeft(image);
-            rotatedImage.draw();
-            return;
-        }     
+        scanner.close();
+
         RotateTest rotator = new RotateTest();
-        APImage rotatedImage = rotator.rotateLeft(image);
+        APImage rotatedImage;
+        if (input.equals("90")) {
+            rotatedImage = rotator.rotateRight(image);
+        } else if (input.equals("180")) {
+            rotatedImage = rotator.rotate180(image);
+        } else if (input.equals("-90")) {
+            rotatedImage = rotator.rotateLeft(image);
+        } else {
+            rotatedImage = rotator.rotateLeft(image);
+        }
         rotatedImage.draw();
-        return;
-        
     }
 }

@@ -39,5 +39,6 @@ public class Posterize {
             }
         }
         posterized.draw();
+        scanner.close();
     }
 }

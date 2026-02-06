@@ -1,5 +1,5 @@
 import images.*;
-import java.util.*;
+import java.util.Scanner;
 
 public class MenuDriver {
     private Scanner scanner;
@@ -86,6 +86,10 @@ public class MenuDriver {
                     System.out.println("Invalid option. Please try again.");
             }
         }                    
+
+        if (scanner != null) {
+            scanner.close();
+        }
         System.out.println("Exiting...");
     }
 }

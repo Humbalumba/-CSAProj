@@ -12,15 +12,16 @@ public class TestEdges {
         System.out.print("Enter an image file name: ");
         String fileName = stringScanner.nextLine();
 
+        intScanner.close();
+        stringScanner.close();
+
         APImage original = new APImage(fileName);
         original.draw();
 
-        // Create a blank image to receive the edges
         int width = original.getWidth();
         int height = original.getHeight();
         APImage theSketch = new APImage(width, height);
 
-        // Visit all pixels except for the left column and bottom row
         for (int y = 0; y < height - 1; y++) {
             for (int x = 1; x < width; x++) {
                 
@@ -33,7 +34,6 @@ public class TestEdges {
 
                 Pixel newPixel = theSketch.getPixel(x, y);
                 
-                //White and black threshold
                 if (Math.abs(oldAve - leftAve) <= threshold || 
                     Math.abs(oldAve - bottomAve) <= threshold) {
                     newPixel.setRed(255);

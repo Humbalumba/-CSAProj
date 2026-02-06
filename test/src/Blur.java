@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Blur {
     public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Enter an image file name: ");
-        String fileName = reader.nextLine();
+        String fileName = scanner.nextLine();
 
         APImage original = new APImage(fileName);
         original.draw();
@@ -35,6 +35,6 @@ public class Blur {
             }
         }
         blurred.draw();
-        reader.close();
+        scanner.close();
     }
 }

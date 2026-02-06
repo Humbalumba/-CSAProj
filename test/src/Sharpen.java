@@ -8,12 +8,13 @@ public class Sharpen {
 
         System.out.print("Enter an image file name: ");
         String fileName = scanner.nextLine();
-        
+
         System.out.print("Enter degree of sharpening (amount to darken): ");
         int degree = scanner.nextInt();
-        
+
         System.out.print("Enter an integer threshold: ");
         int threshold = scanner.nextInt();
+        scanner.close();
 
         APImage original = new APImage(fileName);
         original.draw();
