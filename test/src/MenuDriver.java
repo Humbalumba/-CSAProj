@@ -23,17 +23,18 @@ public class MenuDriver {
         System.out.println("1. Convert to Grayscale");
         System.out.println("2. Convert to Black and White");
         System.out.println("3. Rotate Image");
-        System.out.println("4. Exit");
         System.out.println("4. Blur Image");
         System.out.println("5. Sharpen Image");
         System.out.println("6. Negative Image");
         System.out.println("7. Posterize Image");
         System.out.println("8. Enlarge Image");
+        System.out.println("9. Apply Color Filter");
+        System.out.println("10. Exit");
         System.out.print("Choose an option: ");
     }
 
     public void runMenu(){
-        while (input != 4) {
+        while (input != 10) {
             displayMenu();
             input = scanner.nextInt();
             if (input == 1){
@@ -71,6 +72,15 @@ public class MenuDriver {
                 double scaleFactor = scanner.nextDouble();
                 image = Filters.enlarge(image, scaleFactor);
                 image.draw();
+                } else if (input == 9){
+                    System.out.print("Enter red adjustment: ");
+                    int redAdj = scanner.nextInt();
+                    System.out.print("Enter green adjustment: ");
+                    int greenAdj = scanner.nextInt();
+                    System.out.print("Enter blue adjustment: ");
+                    int blueAdj = scanner.nextInt();
+                    image = Filters.colorFilter(image, redAdj, greenAdj, blueAdj);
+                    image.draw();
                 } else {
                     System.out.println("Invalid option. Please try again.");
             }
