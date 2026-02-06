@@ -1,11 +1,9 @@
 import java.util.Scanner;
-import images.APImage;
-import images.Pixel;
-import java.lang.Math;
+import images.*;
 
-public class oldfashioned {
+public class Sepia {
     public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         
        
         APImage image = new APImage("test/src/images/smokey.jpg");
@@ -36,7 +34,8 @@ public class oldfashioned {
         }
         
         System.out.print("Press return to continue: ");
-        reader.nextLine();
+        scanner.nextLine();
+        scanner.close();
         
         image.draw();
     }

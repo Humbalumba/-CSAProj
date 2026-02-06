@@ -124,6 +124,38 @@ public class Filters {
 
     }
 
+    public static APImage sepia(APImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Pixel p = image.getPixel(x, y);
+                int red = p.getRed();
+                int green = p.getGreen();
+                int blue = p.getBlue();
+                
+
+                int gray = (int)(red * 0.299 + green * 0.587 + blue * 0.114);
+                
+                if (gray < 63){
+                    red = (int)(gray * 1.1);
+                    blue = (int)(gray * 0.9);
+                } else if (gray < 192){
+                    red = (int)(gray * 1.15);
+                    blue = (int)(gray * 0.85);
+                } else{
+                    red = Math.min((int)(gray * 1.08), 255);
+                    blue = (int)(gray * 0.93);
+                }
+                
+                p.setRed(red);
+                p.setGreen(gray);
+                p.setBlue(blue);
+            }
+        }
+        return image;
+    }
+
     public static APImage colorFilter(APImage image, int redAdj, int greenAdj, int blueAdj) {
         int width = image.getWidth();
         int height = image.getHeight();

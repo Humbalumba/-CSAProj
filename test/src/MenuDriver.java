@@ -25,18 +25,19 @@ public class MenuDriver {
         System.out.println("1. Convert to Grayscale");
         System.out.println("2. Convert to Black and White");
         System.out.println("3. Rotate Image");
-        System.out.println("4. Blur Image");
-        System.out.println("5. Sharpen Image");
-        System.out.println("6. Negative Image");
-        System.out.println("7. Posterize Image");
-        System.out.println("8. Enlarge Image");
-        System.out.println("9. Apply Color Filter");
-        System.out.println("10. Exit");
+        System.out.println("4. Sepia Image");
+        System.out.println("5. Blur Image");
+        System.out.println("6. Sharpen Image");
+        System.out.println("7. Negative Image");
+        System.out.println("8. Posterize Image");
+        System.out.println("9. Enlarge Image");
+        System.out.println("10. Apply Color Filter");
+        System.out.println("11. Exit");
         System.out.print("Choose an option: ");
     }
 
     public void runMenu(){
-        while (input != 10) {
+        while (input != 11) {
             displayMenu();
             input = scanner.nextInt();
             if (input == 1){
@@ -57,23 +58,26 @@ public class MenuDriver {
                     image.draw();
 
             } else if (input == 4) {
-                Filters.blur(image);
+                Filters.sepia(image);
                 image.draw();
             } else if (input == 5) {
-                Filters.sharpen(image);
+                Filters.blur(image);
                 image.draw();
             } else if (input == 6) {
-                Filters.negative(image);
+                Filters.sharpen(image);
                 image.draw();
             } else if (input == 7) {
-                Filters.posterize(image);
+                Filters.negative(image);
                 image.draw();
             } else if (input == 8) {
+                Filters.posterize(image);
+                image.draw();
+            } else if (input == 9) {
                 System.out.print("Enter scale factor to enlarge: ");
                 double scaleFactor = scanner.nextDouble();
                 image = Filters.enlarge(image, scaleFactor);
                 image.draw();
-                } else if (input == 9){
+                } else if (input == 10){
                     System.out.print("Enter red adjustment: ");
                     int redAdj = scanner.nextInt();
                     System.out.print("Enter green adjustment: ");
