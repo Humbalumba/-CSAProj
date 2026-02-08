@@ -2,14 +2,14 @@ import java.util.*;
 import images.*;
 
 /**
- * Image processing filter utility class providing various image manipulation methods.
+ * Image processing class with multiple filter methods
  */
 public class Filters {
     
     /**
-     * Converts an image to two colors based on brightness threshold.
+     * Converts an image to two colors based on a threshold value (128).
      * 
-     * @param image the image to convert (non-null)
+     * @param image the image to convert 
      * @param r1 red value for dark pixels (0-255)
      * @param g1 green value for dark pixels (0-255)
      * @param b1 blue value for dark pixels (0-255)
@@ -17,7 +17,7 @@ public class Filters {
      * @param g2 green value for bright pixels (0-255)
      * @param b2 blue value for bright pixels (0-255)
      * @return the modified image with two-color conversion applied
-     * @precondition image is non-null; color values are integers in range [0, 255]
+     * @precondition image is not null; color values are integers in range [0, 255]
      * @postcondition all pixels in image are set to either (r1,g1,b1) or (r2,g2,b2) based on average brightness threshold of 128
      */
     public static APImage twoColorConvert(APImage image, int r1, int g1, int b1, int r2, int g2, int b2) {
@@ -50,10 +50,10 @@ public class Filters {
     /**
      * Converts an image to black and white.
      * 
-     * @param image the image to convert (non-null)
+     * @param image the image to convert 
      * @return the modified image in black and white
-     * @precondition image is non-null
-     * @postcondition all pixels in image are either pure black (0,0,0) or pure white (255,255,255) based on brightness
+     * @precondition image is not null
+     * @postcondition all pixels in image are either black (0,0,0) or white (255,255,255) based on brightness
      */
     public static APImage blackAndWhite(APImage image) {
         return twoColorConvert(image, 0, 0, 0, 255, 255, 255);
@@ -62,10 +62,10 @@ public class Filters {
     /**
      * Converts an image to grayscale.
      * 
-     * @param image the image to convert (non-null)
+     * @param image the image to convert
      * @return the modified image in grayscale
-     * @precondition image is non-null
-     * @postcondition all pixels in image have equal R, G, B values equal to the average of their original RGB components
+     * @precondition image is not null
+     * @postcondition all pixels in image have equal R, G, B values equal to the average of their original RGB
      */
     public static APImage grayscale(APImage image) {
         int width = image.getWidth();
@@ -91,9 +91,9 @@ public class Filters {
     /**
      * Rotates an image 90 degrees counterclockwise.
      * 
-     * @param image the image to rotate (non-null)
+     * @param image the image to rotate
      * @return a new rotated image with swapped dimensions
-     * @precondition image is non-null
+     * @precondition image is not null
      * @postcondition a new APImage is returned with dimensions (height, width) of original; original image is unmodified
      */
     public static APImage rotateLeft(APImage image) {
@@ -120,9 +120,9 @@ public class Filters {
     /**
      * Rotates an image 90 degrees clockwise.
      * 
-     * @param image the image to rotate (non-null)
+     * @param image the image to rotate
      * @return a new rotated image with swapped dimensions
-     * @precondition image is non-null
+     * @precondition image is not null
      * @postcondition a new APImage is returned with dimensions (height, width) of original; original image is unmodified
      */
     public static APImage rotateRight(APImage image) {
@@ -149,9 +149,9 @@ public class Filters {
     /**
      * Rotates an image 180 degrees.
      * 
-     * @param image the image to rotate (non-null)
+     * @param image the image to rotate 
      * @return a new rotated image with same dimensions
-     * @precondition image is non-null
+     * @precondition image is not null
      * @postcondition a new APImage is returned with same dimensions; pixels are flipped both horizontally and vertically; original image is unmodified
      */
     public static APImage rotate180(APImage image) {
@@ -178,10 +178,10 @@ public class Filters {
     /**
      * Rotates an image by specified angle.
      * 
-     * @param image the image to rotate (non-null)
+     * @param image the image to rotate
      * @param angle rotation angle in degrees (90, -90, or 180)
      * @return the rotated image
-     * @precondition image is non-null; angle is one of 90, -90, or 180
+     * @precondition image is not null; angle is one of 90, -90, or 180
      * @postcondition image is rotated by the specified angle; returned image has appropriate dimensions for the rotation
      */
     public static APImage rotate(APImage image, int angle) {
@@ -197,12 +197,12 @@ public class Filters {
     }
 
     /**
-     * Applies a sepia tone effect to an image.
+     * Applies a sepia effect to an image.
      * 
-     * @param image the image to process (non-null)
+     * @param image the image to process
      * @return the modified image with sepia effect
-     * @precondition image is non-null
-     * @postcondition image has warm brown tones applied; RGB values adjusted based on brightness level with sepia color mapping
+     * @precondition image is not null
+     * @postcondition image has sepia applied; RGB values adjusted
      */
     public static APImage sepia(APImage image) {
         int width = image.getWidth();
@@ -236,40 +236,6 @@ public class Filters {
         }
         return image;
     }
-
-    /**
-     * Applies a color filter by adjusting RGB values.
-     * 
-     * @param image the image to filter (non-null)
-     * @param redAdj adjustment to red channel (-255 to 255)
-     * @param greenAdj adjustment to green channel (-255 to 255)
-     * @param blueAdj adjustment to blue channel (-255 to 255)
-     * @return a new image with color adjustments applied
-     * @precondition image is non-null; adjustment values are integers
-     * @postcondition a new APImage is returned with same dimensions as original; each pixel's RGB values are adjusted and clamped to [0, 255]; original image is unmodified
-     */
-    public static APImage colorFilter(APImage image, int redAdj, int greenAdj, int blueAdj) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-        APImage filteredImage = new APImage(width, height);
-
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                Pixel oldPixel = image.getPixel(x, y);
-                Pixel newPixel = filteredImage.getPixel(x, y);
-
-                int red = Math.max(0, Math.min(255, oldPixel.getRed() + redAdj));
-                int green = Math.max(0, Math.min(255, oldPixel.getGreen() + greenAdj));
-                int blue = Math.max(0, Math.min(255, oldPixel.getBlue() + blueAdj));
-
-                newPixel.setRed(red);
-                newPixel.setGreen(green);
-                newPixel.setBlue(blue);
-            }
-        }
-        return filteredImage;
-    }
-    
     /**
      * Clamps a value to the valid RGB range.
      * 
@@ -285,11 +251,45 @@ public class Filters {
     }
 
     /**
-     * Applies a blur effect to an image using a 3x3 averaging kernel.
+     * Applies a color filter by adjusting RGB values.
      * 
-     * @param image the image to blur (non-null)
+     * @param image the image to filter
+     * @param redAdj adjustment to red channel (-255 to 255)
+     * @param greenAdj adjustment to green channel (-255 to 255)
+     * @param blueAdj adjustment to blue channel (-255 to 255)
+     * @return a new image with color adjustments applied
+     * @precondition image is not null; adjustment values are integers between -255 and 255
+     * @postcondition a new APImage is returned with same dimensions as original; each pixel's RGB values are adjusted and clamped to [0, 255]; original image is unmodified
+     */
+    public static APImage colorFilter(APImage image, int redAdj, int greenAdj, int blueAdj) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        APImage filteredImage = new APImage(width, height);
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Pixel oldPixel = image.getPixel(x, y);
+                Pixel newPixel = filteredImage.getPixel(x, y);
+
+                int red = clamp(oldPixel.getRed() + redAdj);
+                int green = clamp(oldPixel.getGreen() + greenAdj);
+                int blue = clamp(oldPixel.getBlue() + blueAdj);
+
+                newPixel.setRed(red);
+                newPixel.setGreen(green);
+                newPixel.setBlue(blue);
+            }
+        }
+        return filteredImage;
+    }
+    
+
+    /**
+     * Applies a blur effect to an image
+     * 
+     * @param image the image to blur
      * @return the modified image with blur effect applied
-     * @precondition image is non-null
+     * @precondition image is not null
      * @postcondition each pixel in image is replaced with the average of itself and its 8 neighboring pixels; edge pixels use available neighbors only
      */
     public static APImage blur(APImage image) {
@@ -333,12 +333,12 @@ public class Filters {
     }
 
     /**
-     * Applies a sharpen effect to an image using a kernel convolution.
+     * Applies a sharpen effect to an image.
      * 
-     * @param image the image to sharpen (non-null)
+     * @param image the image to sharpen
      * @return the modified image with sharpening effect applied
-     * @precondition image is non-null
-     * @postcondition image edges are enhanced using a 3x3 convolution kernel; pixel values are clamped to [0, 255]; original dimensions unchanged
+     * @precondition image is not null
+     * @postcondition image edges are enhanced; pixel values are clamped to [0, 255]; original dimensions unchanged
      */
     public static APImage sharpen(APImage image) {
         int width = image.getWidth();
@@ -385,9 +385,9 @@ public class Filters {
     /**
      * Inverts all colors in an image (creates a negative).
      * 
-     * @param image the image to invert (non-null)
+     * @param image the image to invert 
      * @return the modified image with inverted colors
-     * @precondition image is non-null
+     * @precondition image is not null
      * @postcondition each RGB value in image is replaced with (255 - original value); dimensions unchanged
      */
     public static APImage negative(APImage image) {
@@ -407,9 +407,9 @@ public class Filters {
     /**
      * Converts image to two random colors (posterization effect).
      * 
-     * @param image the image to posterize (non-null)
+     * @param image the image to posterize
      * @return the modified image with random color posterization
-     * @precondition image is non-null
+     * @precondition image is not null
      * @postcondition image has two randomly generated colors applied based on brightness threshold of 128; dimensions unchanged
      */
     public static APImage posterize(APImage image) {
@@ -423,11 +423,11 @@ public class Filters {
     /**
      * Enlarges an image by a specified scale factor.
      * 
-     * @param image the image to enlarge (non-null)
+     * @param image the image to enlarge
      * @param scale scaling factor (positive value; >1 enlarges, <1 shrinks)
      * @return a new image scaled by the specified factor
-     * @precondition image is non-null; scale is positive (scale > 0)
-     * @postcondition a new APImage is returned with dimensions scaled by factor using nearest-neighbor sampling; minimum dimensions are 1x1; original image is unmodified
+     * @precondition image is not null; scale is positive (scale > 0)
+     * @postcondition a new APImage is returned with dimensions scaled by factor; minimum dimensions are 1x1; original image is unmodified
      */
     public static APImage enlarge(APImage image, double scale) {
         if (scale <= 0) return image;

@@ -35,7 +35,7 @@ public class MenuDriver {
      * Displays the filter options menu to the user.
      * 
      * @precondition none
-     * @postcondition menu text is printed to console; user is prompted to select an option
+     * @postcondition menu text is printed; user is prompted to select an option
      */
     public void displayMenu() {
         System.out.println("Image Processing Menu:");
@@ -54,7 +54,7 @@ public class MenuDriver {
     }
 
     /**
-     * Runs the interactive menu loop for processing images.
+     * Runs the menu loop for processing images.
      * Continuously prompts user for filter selection until exit option (11) is chosen.
      * 
      * @precondition image is loaded; scanner is initialized
