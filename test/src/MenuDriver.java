@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class MenuDriver {
     private Scanner scanner;
     private APImage image;
+    private APImage original;
     private int input;
 
     /**
@@ -23,11 +24,13 @@ public class MenuDriver {
         String imageName = scanner.nextLine();
         try{
             imageName = "test\\src\\images\\" + imageName + ".jpg";
-            image = new APImage(imageName);
+            original = new APImage(imageName);
+            image = original;
         } catch (Exception e){
             System.out.println("Invalid file name. Using default image.");
             imageName = "test\\src\\images\\smokey.jpg";
-            image = new APImage(imageName);
+            original = new APImage(imageName);
+            image = original;
         }
     }
 
@@ -64,12 +67,16 @@ public class MenuDriver {
         while (input != 11) {
             displayMenu();
             input = scanner.nextInt();
-            if (input == 1){
-                    Filters.grayscale(image);
-                    image.draw();
+                if (input == 1){
+                    original.draw();
+                    APImage filtered = original.clone();
+                    Filters.grayscale(filtered);
+                    filtered.draw();
                 } else if (input == 2){
-                    Filters.blackAndWhite(image);
-                    image.draw();
+                    original.draw();
+                    APImage filtered = original.clone();
+                    Filters.blackAndWhite(filtered);
+                    filtered.draw();
                 } else if (input == 3){
                     System.out.print("Enter rotation angle (90, -90, 180): ");
                     int angle = scanner.nextInt();
@@ -78,29 +85,41 @@ public class MenuDriver {
                         System.out.print("Enter rotation angle (90, -90, 180): ");
                         angle = scanner.nextInt();
                     }
-                    image = Filters.rotate(image, angle);
-                    image.draw();
+                    original.draw();
+                    APImage rotated = Filters.rotate(original, angle);
+                    rotated.draw();
 
             } else if (input == 4) {
-                Filters.sepia(image);
-                image.draw();
+                original.draw();
+                APImage filtered = original.clone();
+                Filters.sepia(filtered);
+                filtered.draw();
             } else if (input == 5) {
-                Filters.blur(image);
-                image.draw();
+                original.draw();
+                APImage filtered = original.clone();
+                Filters.blur(filtered);
+                filtered.draw();
             } else if (input == 6) {
-                Filters.sharpen(image);
-                image.draw();
+                original.draw();
+                APImage filtered = original.clone();
+                Filters.sharpen(filtered);
+                filtered.draw();
             } else if (input == 7) {
-                Filters.negative(image);
-                image.draw();
+                original.draw();
+                APImage filtered = original.clone();
+                Filters.negative(filtered);
+                filtered.draw();
             } else if (input == 8) {
-                Filters.posterize(image);
-                image.draw();
+                original.draw();
+                APImage filtered = original.clone();
+                Filters.posterize(filtered);
+                filtered.draw();
             } else if (input == 9) {
                 System.out.print("Enter scale factor to enlarge: ");
                 double scaleFactor = scanner.nextDouble();
-                image = Filters.enlarge(image, scaleFactor);
-                image.draw();
+                original.draw();
+                APImage enlarged = Filters.enlarge(original, scaleFactor);
+                enlarged.draw();
                 } else if (input == 10){
                     System.out.print("Enter red adjustment: ");
                     int redAdj = scanner.nextInt();
@@ -108,8 +127,9 @@ public class MenuDriver {
                     int greenAdj = scanner.nextInt();
                     System.out.print("Enter blue adjustment: ");
                     int blueAdj = scanner.nextInt();
-                    image = Filters.colorFilter(image, redAdj, greenAdj, blueAdj);
-                    image.draw();
+                    original.draw();
+                    APImage colorFiltered = Filters.colorFilter(original, redAdj, greenAdj, blueAdj);
+                    colorFiltered.draw();
                 } else {
                     System.out.println("Invalid option. Please try again.");
             }
