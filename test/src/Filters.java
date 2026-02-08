@@ -430,25 +430,26 @@ public class Filters {
      * @postcondition a new APImage is returned with dimensions scaled by factor; minimum dimensions are 1x1; original image is unmodified
      */
     public static APImage enlarge(APImage image, double scale) {
-        if (scale <= 0) return image;
-        int width = image.getWidth();
-        int height = image.getHeight();
-        int newW = Math.max(1, (int) Math.round(width * scale));
-        int newH = Math.max(1, (int) Math.round(height * scale));
-        APImage result = new APImage(newW, newH);
-        for (int x = 0; x < newW; x++) {
-            for (int y = 0; y < newH; y++) {
-                int srcX = Math.min(width - 1, (int) (x / scale));
-                int srcY = Math.min(height - 1, (int) (y / scale));
-                Pixel src = image.getPixel(srcX, srcY);
-                // copy color to target pixel
-                Pixel dst = result.getPixel(x, y);
-                dst.setRed(src.getRed());
-                dst.setGreen(src.getGreen());
-                dst.setBlue(src.getBlue());
+
+        int newWidth = (int) (image.getWidth() * scale);
+        int newHeight = (int) (image.getHeight() * scale);
+        APImage large = new APImage(newWidth, newHeight);
+
+        for (int y = 0; y < image.getHeight(); y++) {
+            for (int x = 0; x < image.getWidth(); x++) {
+                Pixel oldPixel = image.getPixel(x, y);
+
+                for (int dy = 0; dy < scale; dy++) {
+                    for (int dx = 0; dx < scale; dx++) {
+                        Pixel newPixel = large.getPixel((int) (x * scale) + dx, (int) (y * scale) + dy);
+                        newPixel.setRed(oldPixel.getRed());
+                        newPixel.setGreen(oldPixel.getGreen());
+                        newPixel.setBlue(oldPixel.getBlue());
+                    }
+                }
             }
         }
-        return result;
+        return large;
     }
     
 }
